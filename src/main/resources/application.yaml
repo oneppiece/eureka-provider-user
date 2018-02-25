@@ -1,0 +1,45 @@
+
+spring:
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    platform: h2
+    schema: classpath:schema.sql
+    data: classpath:data.sql
+  application:
+    name: eureka-provider-user
+logging:
+  level:
+    root: info
+    org.hibernate: info
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    org.hibernate.type.descriptor.sql.BasicExtractor: trace
+endpoints:
+  info:
+    enabled: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:eureka@peer1:8761/eureka/, http://eureka:eureka@peer2:8762/eureka/
+  instance:
+    prefer-ip-address: true
+    metadata-map:
+      my-metadata: 你好，我是小a`
+---
+server:
+  port: 8000
+spring:
+  profiles: 8000
+---
+server:
+  port: 8001
+spring:
+  profiles: 8001
+---
+server:
+  port: 8002
+spring:
+  profiles: 8002
